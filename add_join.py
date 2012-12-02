@@ -2,7 +2,7 @@
 
 # A script to spam a series of messages in an irc channel
 
-# Copyright (c) 2012 Ivan Sichmann Freitas, Sérgio Durigan Júnior
+# Copyright (c) 2012 Ivan Sichmann Freitas, Sergio Durigan Junior
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
 import weechat as w
 import re
 
-w.register("add_join", "Ivan Sichmann Freitas, Sérgio Durigan Júnior", "0.1", "GPL3",
+w.register("add_join", "Ivan Sichmann Freitas, Sergio Durigan Junior", "0.1", "GPL3",
            "Add a channel to the autojoin list", "", "")
 
 def append_channel(data, buffer, args):
@@ -28,7 +28,9 @@ def append_channel(data, buffer, args):
     server_name = w.buffer_get_string(buffer, "name").split(".")[0]
     config = "irc.server.%s.autojoin" % (server_name)
     channels = w.config_string(w.config_get(config))
-    w.prnt('', channels)
+    if (args != "" and args in channels) or (buffer_name in channels):
+        w.prnt ('', "The channel %s is already present in the list." % buffer_name)
+        return w.WEECHAT_RC_OK
     if args == "":
         channels = channels + "," + buffer_name
     else:
