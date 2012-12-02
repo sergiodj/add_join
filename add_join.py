@@ -20,7 +20,7 @@
 import weechat as w
 import re
 
-w.register("add_join", "Ivan Sichmann Freitas, Sergio Durigan Junior", "0.1", "GPL3",
+w.register("add_join", "Ivan Sichmann Freitas, Sergio Durigan Junior", "0.2", "GPL3",
            "Add a channel to the autojoin list", "", "")
 
 def append_channel(data, buffer, args):
